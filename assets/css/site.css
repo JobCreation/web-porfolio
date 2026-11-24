@@ -1,0 +1,158 @@
+.wrap { width: min(var(--wrap), 100% - 48px); margin-inline: auto; }
+@media (max-width: 600px) { .wrap { width: calc(100% - 32px); } }
+
+/* 상단 바 */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; gap: 20px; min-height: 60px; }
+.brand { font-weight: 800; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
+.brand i { font-style: normal; color: var(--accent); }
+.nav { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  padding: 8px 12px; border-radius: var(--r-full);
+  font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; white-space: nowrap;
+}
+.nav a:hover, .nav a.on { color: var(--ink); background: var(--primary-soft); }
+.theme {
+  flex: none; width: 40px; height: 40px; display: grid; place-items: center;
+  border: 1px solid var(--line); border-radius: var(--r-full); background: var(--surface); cursor: pointer;
+}
+.theme svg { width: 18px; height: 18px; }
+.theme .moon { display: none; }
+:root[data-theme="dark"] .theme .sun { display: none; }
+:root[data-theme="dark"] .theme .moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme .sun { display: none; }
+  :root:not([data-theme="light"]) .theme .moon { display: block; }
+}
+@media (max-width: 760px) {
+  .top .wrap { flex-wrap: wrap; row-gap: 0; padding-top: 8px; }
+  .brand { margin-right: auto; }
+  .nav { order: 3; width: 100%; margin: 4px -4px 8px; }
+}
+
+/* 첫 화면 */
+.hero { padding: clamp(48px, 9vw, 112px) 0 0; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 6vw, 80px); align-items: end; }
+.hero .label { display: flex; align-items: center; gap: 12px; }
+.hero .label::before { content: ""; width: 36px; height: 1px; background: var(--accent); }
+.hero h1 {
+  margin: 20px 0 0;
+  font-size: clamp(52px, 10.5vw, 136px); font-weight: 800; line-height: 0.98; letter-spacing: -0.045em;
+}
+.hero h1 span { color: var(--accent); }
+.hero .role { margin: 18px 0 0; font-family: var(--mono); font-size: 14px; color: var(--primary); letter-spacing: 0.02em; }
+.hero .headline {
+  margin: 28px 0 0; max-width: 22em;
+  font-size: clamp(21px, 2.5vw, 30px); font-weight: 600; line-height: 1.42; letter-spacing: -0.02em;
+}
+.hero .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.portrait { position: relative; margin: 0 14px 14px 0; }
+.portrait::before {
+  content: ""; position: absolute; inset: 14px -14px -14px 14px;
+  background: var(--primary); border-radius: var(--r-sm);
+}
+.portrait img, .portrait .ph {
+  position: relative; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: var(--r-sm); background: var(--surface); border: 1px solid var(--line);
+}
+.portrait .ph {
+  display: grid; place-items: center;
+  font-size: clamp(64px, 10vw, 120px); font-weight: 800; color: var(--primary);
+  background-image: repeating-linear-gradient(135deg, transparent 0 11px, var(--line) 11px 12px);
+}
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: clamp(48px, 7vw, 88px); border-top: 2px solid var(--ink);
+}
+.stat { padding: 20px 20px 24px 0; border-bottom: 1px solid var(--line); }
+.stat b { display: block; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+.stat span { font-size: 14px; color: var(--muted); line-height: 1.5; display: block; margin-top: 4px; }
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .portrait { max-width: 260px; order: -1; }
+}
+
+/* 섹션 공통: 왼쪽 번호·제목, 오른쪽 내용 */
+.section {
+  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: clamp(24px, 5vw, 72px);
+  padding: clamp(56px, 8vw, 104px) 0; border-bottom: 1px solid var(--line);
+  scroll-margin-top: 70px;
+}
+.section > header { position: sticky; top: 92px; align-self: start; }
+.section > header .num { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.section > header h2 { margin: 6px 0 0; font-size: 26px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.25; }
+@media (max-width: 860px) {
+  .section { grid-template-columns: 1fr; gap: 24px; }
+  .section > header { position: static; display: flex; align-items: baseline; gap: 12px; }
+  .section > header h2 { margin: 0; }
+}
+
+/* 소개 */
+.bio p { margin: 0 0 1em; font-size: clamp(18px, 1.9vw, 22px); line-height: 1.65; max-width: 34em; }
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0 28px; margin-top: 36px; }
+.principle { padding: 18px 0; border-top: 1px solid var(--ink); }
+.principle p { margin: 6px 0 0; font-size: 16px; line-height: 1.55; }
+
+/* 프로젝트 */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.chip {
+  padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--r-full);
+  background: transparent; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer;
+}
+.chip:hover { color: var(--ink); border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.chip small { font-family: var(--mono); font-size: 11px; margin-left: 6px; opacity: .7; }
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md);
+  overflow: hidden; margin-bottom: 24px;
+}
+.project > img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border-bottom: 1px solid var(--line); }
+.project .body { padding: clamp(22px, 3.2vw, 36px); }
+.project h3 { margin: 8px 0 0; font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; }
+.project .summary { margin: 10px 0 0; font-size: 18px; font-weight: 500; line-height: 1.55; }
+.project ul { margin: 18px 0 0; padding: 0; list-style: none; }
+.project li { position: relative; padding-left: 20px; margin-top: 8px; font-size: 16px; color: var(--muted); line-height: 1.6; }
+.project li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 2px; background: var(--accent); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.tags span { padding: 3px 10px; border-radius: var(--r-sm); background: var(--primary-soft); font-family: var(--mono); font-size: 12px; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0 20px; margin-top: 24px; }
+.metric { padding-top: 12px; border-top: 1px solid var(--line); }
+.metric b { display: block; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--primary); }
+.metric span { font-size: 13px; color: var(--muted); line-height: 1.45; display: block; }
+.project .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+
+/* 연표형 목록 (경력, 학력, 자격) */
+.rows { border-top: 2px solid var(--ink); }
+.row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.row .when { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 4px; }
+.row h3 { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.4; }
+.row .org { margin: 2px 0 0; font-size: 15px; color: var(--primary); font-weight: 500; }
+.row .desc { margin: 8px 0 0; font-size: 16px; color: var(--muted); line-height: 1.6; white-space: pre-line; }
+@media (max-width: 600px) { .row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* 기술 */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px 28px; }
+.skills h3 { margin: 0 0 4px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); font-size: 15px; font-weight: 700; }
+.skills ul { margin: 0; padding: 0; list-style: none; }
+.skills li { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+
+/* 연락 */
+.contact { padding: clamp(64px, 10vw, 128px) 0; }
+.contact h2 { margin: 16px 0 0; max-width: 16em; font-size: clamp(30px, 5vw, 56px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; }
+.contact .mail {
+  display: inline-block; margin-top: 28px; font-size: clamp(18px, 2.4vw, 26px); font-weight: 600;
+  text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px;
+}
+.contact .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+
+footer.foot { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 13px; color: var(--muted); }
+footer.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer.foot a { text-underline-offset: 3px; }
+
+.state { padding: 120px 0; text-align: center; color: var(--muted); }

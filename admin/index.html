@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>관리자 | 포트폴리오</title>
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <!-- 로그인 / 처음 설정 -->
+  <main class="gate" id="gate" hidden>
+    <div class="gate-card">
+      <div class="label">Portfolio Admin</div>
+      <h1 id="gate-title">관리자 로그인</h1>
+      <p class="hint" id="gate-desc"></p>
+
+      <form id="login-form" hidden>
+        <label>비밀번호
+          <input type="password" id="login-pw" autocomplete="current-password" required>
+        </label>
+        <button class="btn primary" type="submit">로그인</button>
+        <button class="linklike" type="button" id="to-setup">비밀번호를 잊었거나 토큰이 만료됐어요</button>
+      </form>
+
+      <form id="setup-form" hidden>
+        <label>GitHub 토큰
+          <input type="password" id="setup-token" autocomplete="off" placeholder="github_pat_…" required>
+          <small>이 저장소 하나에만 'Contents: Read and write' 권한을 준 토큰. 만드는 방법은 README 참고.</small>
+        </label>
+        <label>관리자 비밀번호 (10자 이상)
+          <input type="password" id="setup-pw" autocomplete="new-password" minlength="10" required>
+        </label>
+        <label>비밀번호 다시 입력
+          <input type="password" id="setup-pw2" autocomplete="new-password" minlength="10" required>
+        </label>
+        <button class="btn primary" type="submit">설정하고 시작</button>
+        <button class="linklike" type="button" id="to-login" hidden>로그인으로 돌아가기</button>
+      </form>
+
+      <p class="msg" id="gate-msg" role="status"></p>
+    </div>
+  </main>
+
+  <!-- 편집 화면 -->
+  <div class="app" id="app" hidden>
+    <header class="bar">
+      <strong>포트폴리오 관리</strong>
+      <span class="status" id="status" role="status"></span>
+      <a class="btn small quiet" id="view-site" target="_blank" rel="noopener">사이트 보기 ↗</a>
+      <button class="btn small quiet" id="logout" type="button">로그아웃</button>
+      <button class="btn small primary" id="save" type="button" disabled>저장</button>
+    </header>
+    <div class="cols">
+      <nav class="tabs" id="tabs" aria-label="편집할 항목"></nav>
+      <section class="panel" id="panel"></section>
+    </div>
+  </div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

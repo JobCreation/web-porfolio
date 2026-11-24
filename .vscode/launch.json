@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "포트폴리오 실행 (F5)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "http.server",
+      "args": ["8020", "--bind", "127.0.0.1"],
+      "cwd": "${workspaceFolder}",
+      "serverReadyAction": { "pattern": "Serving HTTP", "uriFormat": "http://127.0.0.1:8020/", "action": "openExternally" }
+    }
+  ]
+}

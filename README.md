@@ -1,70 +1,57 @@
-<p align="center">
-  <h1 align="center">Developer's Portfolio ✨</h1>
+# 개인 포트폴리오 + 관리자 페이지
 
-  <p align="center">
-Profolio는 개발자를 위한, 쉽고 빠르게 제작 할 수 있는 정적 포트폴리오 템플릿 입니다. <br/>Github 페이지로 호스팅 됩니다. <br/>웹 사이트는 <a href="https://congchu.github.io/web-porfolio/">DEMO</a>에서 확인하실 수 있습니다.
-  <br/>
-  <br/> 더 많은 템플릿은 <a href="https://github.com/congchu/portfolio-collection" >portfolio-collection</a> 저장소에서 보실 수 있습니다.
-    <br/>
-    <br/>
-    <img src="https://img.shields.io/badge/-Bootstrap-05122A?style=flat&logo=bootstrap&logoColor=563D7C"/>
-    <img src="https://img.shields.io/badge/-CSS-05122A?style=flat&logo=CSS3&logoColor=1572B6"/>
-    <img src="https://img.shields.io/badge/-HTML-05122A?style=flat&logo=HTML5"/>
-  <br/>
-  <br/>
-  <img src="https://github.com/congchu/web-porfolio/blob/main/demo/20210428.gif?raw=true"/>
-</p>
+- 포트폴리오: <https://jobcreation.github.io/web-porfolio/>
+- 관리자: <https://jobcreation.github.io/web-porfolio/admin/>
 
-## Overview ⭐️
+GitHub Pages만으로 동작합니다. 관리자 페이지에서 고친 내용과 사진은 이 저장소에 바로 커밋되고, 약 1분 뒤 사이트에 반영됩니다.
 
-- static website로 Github pages 활용한 웹 호스팅 가능
-- 개발자 맞춤형 포트폴리오 웹 페이지
-- 제작자 표기 시, 무료로 활용가능
+## 내 PC에서 실행
 
-## Prerequisites 🍪
+- **더블클릭**: `run.bat` (브라우저가 열립니다)
+- **VS Code**: 이 폴더를 열고 `F5`
+- **터미널**:
 
-- PC에 git이 설치되어 있어야하며, Github 계정이 있어야 합니다.
-- HTML 문법을 몰라도 텍스트만 교체하여 활용 가능합니다.
-- HTML 문법을 알면 레이아웃이나 디자인을 변경할 수 있습니다.
-- CSS를 몰라도 제작 가능하지만, CSS에 친숙하다면 디자인도 자유롭게 변경할 수 있습니다.
-
-## Setup And Deployment 🔧
-
-1. 내 프로젝트로 Fork합니다.
-2. repository를 clone하여 로컬로 내려받습니다.
-
-   ```
-   git clone {저장소URL}
-   ```
-
-3. 내용을 원하는대로 수정합니다.
-4. github commit & push 합니다.
-
-```bash
-git commit -m 'initial project'
-git push - u origin master
+```powershell
+python -m http.server 8020
 ```
 
-6. github Settings에서 pages로 이동하여, Source를 main branch로 바꿔줍니다.
-7. publish 되었다는 URL로 접속하여 확인합니다 (시간이 좀 걸리니, 5분정도 기다려주세요)
+주소: <http://127.0.0.1:8020/> (관리자: <http://127.0.0.1:8020/admin/>)
 
-## Documentation 📑
+`index.html`을 더블클릭해 직접 열면 내용 파일을 읽지 못합니다. 위 방법으로 실행하세요.
 
-튜토리얼 문서는 [웹 포트폴리오 제작 튜토리얼](https://www.notion.so/cucus/85e3bec77d904f1fa282cec4756232c3)에서 확인해주세요.
+## 관리자 페이지 처음 설정 (1회)
 
-## Deploy History 🌳
+1. GitHub에서 토큰 만들기: Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
+   - Repository access: **Only select repositories** → `web-porfolio`
+   - Permissions → Repository permissions → **Contents: Read and write** (나머지는 그대로)
+   - 만료일은 원하는 대로 (만료되면 3번을 다시 하면 됩니다)
+2. 관리자 페이지를 열어 토큰을 붙여 넣고 관리자 비밀번호(10자 이상)를 정합니다.
+3. 다음부터는 비밀번호만 입력하면 됩니다. 비밀번호를 잊었거나 토큰이 만료되면 로그인 화면의 "비밀번호를 잊었거나 토큰이 만료됐어요"에서 새 토큰으로 다시 설정합니다.
 
-2021-12-28
+### 로그인이 지켜 주는 것
 
-- 지킬 셋팅 제거
-- 커스텀 도메인 연결 제거
-- 데모 사이트 및 이미지 경로 변경
+- 토큰은 비밀번호로 암호화(PBKDF2 60만 회 + AES-GCM)되어 `data/auth.json`에 저장됩니다. 비밀번호 자체는 어디에도 저장되지 않습니다.
+- 관리자 페이지 주소는 누구나 열 수 있지만, 비밀번호 없이는 토큰을 풀 수 없어 아무것도 고칠 수 없습니다.
+- 저장소가 공개라서 암호화된 파일도 공개됩니다. **짧거나 흔한 비밀번호는 쓰지 마세요.** 토큰 권한을 이 저장소의 Contents로만 제한해 두면, 최악의 경우에도 영향은 이 사이트 내용에 그칩니다.
 
-2021-04-22
+## 폴더
 
-- 전체 레이아웃 수정
-- header 사진 변경
+| 경로 | 내용 |
+|---|---|
+| `index.html`, `assets/js/site.js`, `assets/css/site.css` | 포트폴리오 화면 |
+| `admin/index.html`, `assets/js/admin.js`, `assets/css/admin.css` | 관리자 페이지 |
+| `assets/css/tokens.css`, `DESIGN.md` | 색·글자 등 디자인 기준 |
+| `assets/js/config.js` | 저장소 이름과 사이트 주소 |
+| `data/content.json` | 사이트 내용 (관리자 페이지가 수정) |
+| `data/auth.json` | 암호화된 토큰 (처음 설정 때 생성) |
+| `uploads/` | 관리자 페이지에서 올린 사진 |
 
-2021-04-20
+## 코드를 직접 고칠 때
 
-- 프로젝트 생성
+관리자 페이지에서 저장하면 GitHub 쪽에 커밋이 쌓입니다. 내 PC에서 코드를 고치기 전에 먼저 받아 오세요.
+
+```powershell
+git pull
+```
+
+이전 템플릿 사이트(2022년)는 `legacy-2022` 브랜치에 보관되어 있습니다.

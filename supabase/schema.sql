@@ -42,3 +42,9 @@ alter table public.resumes enable row level security;
 alter table public.files enable row level security;
 
 -- 파일 보관함: Storage > New bucket 에서 이름 uploads, Public 체크로 만들어 주세요.
+
+-- 서버(서비스 키)가 표를 읽고 쓸 수 있게 권한을 분명히 준다.
+grant usage on schema public to service_role;
+grant all privileges on all tables in schema public to service_role;
+grant all privileges on all sequences in schema public to service_role;
+alter default privileges in schema public grant all on tables to service_role;

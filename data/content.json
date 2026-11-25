@@ -1,22 +1,30 @@
 {
   "meta": {
-    "updatedAt": "2026-11-25T05:56:58.838Z"
+    "updatedAt": "2026-11-25T06:15:54.234Z"
   },
   "profile": {
     "name": "박승우",
-    "nameEn": "HONG GILDONG",
-    "role": "AI 서비스 개발자",
+    "nameEn": "PARK SEUNGWOO",
+    "role": "AI 엔지니어",
     "tagline": "Portfolio · 2026",
     "headline": "공공 데이터를 읽고, 현장에서 바로 쓸 수 있는 AI 도구로 만듭니다.",
     "bio": "이 문단은 초안입니다. 관리자 페이지의 '프로필·사진'에서 이름, 사진, 소개를 내 것으로 바꿔 주세요.\n\n서울시립대학교 실전 AI 과정에서 로컬 언어 모델, RAG, 파인튜닝을 직접 돌려 보며 민원 업무를 돕는 서비스를 만들고 있습니다. 모델이 낸 답은 그대로 믿지 않고, 같은 질문으로 여러 구성을 비교해 근거를 남깁니다.",
-    "photo": "uploads/1795586213560-t700gl.jpg",
-    "email": "",
-    "resumeUrl": "",
-    "contactLine": "함께 만들 일이 있다면 편하게 연락 주세요.",
+    "photo": "",
+    "email": "seungwoo489@gmail.com",
+    "resumeUrl": "https://litt.ly/0115",
+    "contactLine": "010-8259-7188 함께 만들 일이 있다면 편하게 연락 주세요.",
     "links": [
       {
         "label": "GitHub",
         "url": "https://github.com/JobCreation"
+      },
+      {
+        "label": "https://thearts.arko.or.kr/apecamp/archive/26",
+        "url": ""
+      },
+      {
+        "label": "https://thearts.arko.or.kr/apecamp/archive/27",
+        "url": ""
       }
     ]
   },

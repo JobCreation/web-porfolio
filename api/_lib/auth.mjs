@@ -91,6 +91,8 @@ export async function register({ email, password, name }) {
 export async function login({ email, password }) {
   const user = await getUserByEmail(email);
   if (!user || !verifyPassword(password, user.pw_salt, user.pw_hash)) {
+    // 비밀번호를 기계로 계속 찍어 보는 것을 조금이라도 늦춘다
+    await new Promise((r) => setTimeout(r, 400));
     throw new HttpError(401, "이메일 또는 비밀번호가 맞지 않습니다.");
   }
   return user;

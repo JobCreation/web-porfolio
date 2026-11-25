@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이력서 플랫폼</title>
+  <meta name="description" content="이력 내용을 올리면 서식 5가지 중 하나로 이력서를 만들어 주는 무료 플랫폼">
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/platform/assets/css/platform.css">
+</head>
+<body>
+  <div class="bar">
+    <a class="logo" href="/">이력서 메이커<i>.</i></a>
+    <div class="spacer"></div>
+    <span class="status" id="status"></span>
+    <a class="btn tiny quiet" id="go-app" href="/app" hidden>내 이력서 편집</a>
+    <div id="theme-slot"></div>
+  </div>
+
+  <main class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="label">무료 · 로그인하면 바로 시작</div>
+        <h1>이력 내용을 넣으면<br>이력서가 됩니다<span>.</span></h1>
+        <p class="sub">한 번 적어 두면 서식만 바꿔 가며 다시 쓸 수 있습니다. 내용은 언제든 고치고, 공개 주소로 바로 보여 줄 수 있습니다.</p>
+        <ol class="steps">
+          <li><b>01</b><span>가입하고 로그인합니다. 결제는 없습니다.</span></li>
+          <li><b>02</b><span>경력·학력·프로젝트를 적고 사진과 첨부파일을 올립니다.</span></li>
+          <li><b>03</b><span>서식 5가지 중 하나를 고르면 바로 이력서가 만들어집니다.</span></li>
+          <li><b>04</b><span>공개 주소를 전달하거나, 인쇄해서 PDF로 저장합니다.</span></li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="tabs-mini" role="group" aria-label="로그인 또는 가입">
+          <button type="button" id="tab-login" aria-pressed="true">로그인</button>
+          <button type="button" id="tab-join" aria-pressed="false">가입</button>
+        </div>
+
+        <h2 id="card-title">로그인</h2>
+        <p class="hint" id="card-desc" style="margin:2px 0 0;font-size:12px;color:var(--muted)">이메일과 비밀번호를 넣어 주세요.</p>
+
+        <form id="form">
+          <label id="name-field" hidden>이름
+            <input type="text" id="name" autocomplete="name" placeholder="홍길동">
+          </label>
+          <label>이메일
+            <input type="email" id="email" autocomplete="email" required>
+          </label>
+          <label>비밀번호
+            <input type="password" id="password" autocomplete="current-password" minlength="8" required>
+            <small id="pw-hint">8자 이상</small>
+          </label>
+          <button class="btn primary" type="submit" id="submit">로그인</button>
+        </form>
+        <p class="msg" id="msg" role="status"></p>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="/platform/assets/js/home.mjs"></script>
+</body>
+</html>

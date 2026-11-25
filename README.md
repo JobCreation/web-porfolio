@@ -1,57 +1,81 @@
-# 개인 포트폴리오 + 관리자 페이지
+# 이력서 플랫폼
 
-- 포트폴리오: <https://jobcreation.github.io/web-porfolio/>
-- 관리자: <https://jobcreation.github.io/web-porfolio/admin/>
+로그인한 사람이 자기 이력 내용을 올리면, 서식 5가지 중 하나로 이력서를 만들어 주는 무료 플랫폼입니다.
+결제 기능은 없습니다.
 
-GitHub Pages만으로 동작합니다. 관리자 페이지에서 고친 내용과 사진은 이 저장소에 바로 커밋되고, 약 1분 뒤 사이트에 반영됩니다.
+| 주소 | 내용 |
+|---|---|
+| `/` | 들머리 화면 (가입·로그인) |
+| `/app` | 개인 admin — 내용 편집, 서식 고르기, 첨부파일 |
+| `/r/<주소>` | 공개 이력서 (로그인 없이 볼 수 있음) |
+| `/owner` | 운영자 화면 — 모든 사용자와 이력서 관리 |
+| `/me` | 예전 1인용 정적 포트폴리오 (그대로 둠) |
 
 ## 내 PC에서 실행
 
-- **더블클릭**: `run.bat` (브라우저가 열립니다)
-- **VS Code**: 이 폴더를 열고 `F5`
-- **터미널**:
-
 ```powershell
-python -m http.server 8020
+node dev-server.mjs
 ```
 
-주소: <http://127.0.0.1:8020/> (관리자: <http://127.0.0.1:8020/admin/>)
+<http://127.0.0.1:8030/> 이 열립니다. `run.bat`을 더블클릭하거나 VS Code에서 `F5`를 눌러도 됩니다.
+키를 넣지 않으면 자료는 `.data/` 폴더에 저장되므로 가입·저장·업로드를 그대로 시험해 볼 수 있습니다.
+(`.data/`는 저장소에 올라가지 않습니다.)
 
-`index.html`을 더블클릭해 직접 열면 내용 파일을 읽지 못합니다. 위 방법으로 실행하세요.
+## Vercel에 배포하기 (사용자가 직접 하는 부분)
 
-## 관리자 페이지 처음 설정 (1회)
+배포한 뒤에는 파일을 쓸 수 없어서 자료 보관소가 필요합니다. 무료 범위로 충분합니다.
 
-1. GitHub에서 토큰 만들기: Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
-   - Repository access: **Only select repositories** → `web-porfolio`
-   - Permissions → Repository permissions → **Contents: Read and write** (나머지는 그대로)
-   - 만료일은 원하는 대로 (만료되면 3번을 다시 하면 됩니다)
-2. 관리자 페이지를 열어 토큰을 붙여 넣고 관리자 비밀번호(10자 이상)를 정합니다.
-3. 다음부터는 비밀번호만 입력하면 됩니다. 비밀번호를 잊었거나 토큰이 만료되면 로그인 화면의 "비밀번호를 잊었거나 토큰이 만료됐어요"에서 새 토큰으로 다시 설정합니다.
+1. **Supabase**(<https://supabase.com>)에 GitHub 계정으로 가입하고 새 프로젝트를 만듭니다. (Free 플랜)
+2. SQL Editor에 [`supabase/schema.sql`](supabase/schema.sql) 내용을 붙여 넣고 실행합니다.
+3. Storage → New bucket → 이름 `uploads`, **Public** 체크로 만듭니다.
+4. Project Settings → API에서 두 값을 복사합니다.
+   - Project URL
+   - `service_role` 키 (비밀 값이므로 브라우저에 넣지 말고 Vercel 환경변수에만 둡니다)
+5. **Vercel**(<https://vercel.com>)에 GitHub 계정으로 로그인하고 이 저장소를 Import 합니다. 빌드 설정은 건드릴 것이 없습니다.
+6. Settings → Environment Variables 에 아래 값을 넣고 다시 배포합니다.
 
-### 로그인이 지켜 주는 것
+| 이름 | 값 |
+|---|---|
+| `SUPABASE_URL` | 4번의 Project URL |
+| `SUPABASE_SERVICE_KEY` | 4번의 service_role 키 |
+| `SESSION_SECRET` | 아무도 모르는 긴 문자열 (로그인 쿠키 서명용) |
+| `OWNER_EMAIL` | 운영자로 쓸 이메일 (선택). 없으면 **처음 가입한 사람**이 운영자가 됩니다 |
+| `SUPABASE_BUCKET` | `uploads` (기본값이라 생략 가능) |
 
-- 토큰은 비밀번호로 암호화(PBKDF2 60만 회 + AES-GCM)되어 `data/auth.json`에 저장됩니다. 비밀번호 자체는 어디에도 저장되지 않습니다.
-- 관리자 페이지 주소는 누구나 열 수 있지만, 비밀번호 없이는 토큰을 풀 수 없어 아무것도 고칠 수 없습니다.
-- 저장소가 공개라서 암호화된 파일도 공개됩니다. **짧거나 흔한 비밀번호는 쓰지 마세요.** 토큰 권한을 이 저장소의 Contents로만 제한해 두면, 최악의 경우에도 영향은 이 사이트 내용에 그칩니다.
+설정이 없으면 들머리 화면에 "자료 보관 설정이 아직 없습니다"라고 뜨고 가입이 막힙니다.
+
+## 운영자가 할 수 있는 일
+
+`/owner`에서 전체 사용자를 보고, 각 사용자의 **이력서를 직접 열어 고치고 저장**할 수 있습니다.
+이름·권한 변경, 비밀번호 재설정, 계정 삭제(이력서·파일 포함)도 가능합니다.
 
 ## 폴더
 
 | 경로 | 내용 |
 |---|---|
-| `index.html`, `assets/js/site.js`, `assets/css/site.css` | 포트폴리오 화면 |
-| `admin/index.html`, `assets/js/admin.js`, `assets/css/admin.css` | 관리자 페이지 |
-| `assets/css/tokens.css`, `DESIGN.md` | 색·글자 등 디자인 기준 |
-| `assets/js/config.js` | 저장소 이름과 사이트 주소 |
-| `data/content.json` | 사이트 내용 (관리자 페이지가 수정) |
-| `data/auth.json` | 암호화된 토큰 (처음 설정 때 생성) |
-| `uploads/` | 관리자 페이지에서 올린 사진 |
+| `platform/` | 플랫폼 화면 (들머리, 개인 admin, 운영자, 공개 이력서) |
+| `platform/assets/js/render.mjs` | 이력서 서식 5종을 그리는 곳 |
+| `platform/assets/js/fields.mjs` | 입력 항목 정의 (여기만 고치면 입력 칸이 늘어남) |
+| `api/` | 서버 함수 (Vercel 서버리스). 바깥 라이브러리를 쓰지 않습니다 |
+| `api/_lib/store.mjs` | 자료 보관 — Supabase 또는 내 PC 폴더 |
+| `supabase/schema.sql` | 표 만드는 SQL |
+| `docs/개발일지.md` | 한 일, 확인한 방법, 남은 일 |
+| `index.html`, `admin/`, `data/`, `assets/` | 예전 1인용 포트폴리오 (GitHub Pages에서 계속 동작) |
 
-## 코드를 직접 고칠 때
+## 서식 5종
 
-관리자 페이지에서 저장하면 GitHub 쪽에 커밋이 쌓입니다. 내 PC에서 코드를 고치기 전에 먼저 받아 오세요.
+| 이름 | 쓰임 |
+|---|---|
+| 밀집형 | 두 단으로 많은 내용을 한눈에 (기본값) |
+| 모던 | 큰 이름과 넓은 여백, 포트폴리오형 |
+| 타임라인 | 시간 순서가 한 줄로 이어지는 형태 |
+| 한 장 | A4 한 장에 들어가는 요약형 |
+| 카드 | 항목마다 카드로 나뉘는 형태 |
 
-```powershell
-git pull
-```
+이력서 화면에서 "인쇄·PDF로 저장"을 누르면 브라우저 인쇄로 PDF를 만들 수 있습니다.
 
-이전 템플릿 사이트(2022년)는 `legacy-2022` 브랜치에 보관되어 있습니다.
+## 알아 둘 점
+
+- 비밀번호를 잊으면 본인이 되돌릴 방법이 아직 없습니다. 운영자가 재설정해 주어야 합니다.
+- 공개 이력서는 주소를 아는 사람이면 누구나 볼 수 있습니다. 개인 admin의 "서식·공개"에서 공개를 꺼 둘 수 있습니다.
+- 올릴 수 있는 파일은 사진·PDF·워드·파워포인트·텍스트이고, 한 개당 6MB까지입니다.

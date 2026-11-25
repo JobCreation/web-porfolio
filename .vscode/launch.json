@@ -2,13 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "포트폴리오 실행 (F5)",
-      "type": "debugpy",
+      "name": "이력서 플랫폼 실행 (F5)",
+      "type": "node",
       "request": "launch",
-      "module": "http.server",
-      "args": ["8020", "--bind", "127.0.0.1"],
+      "program": "${workspaceFolder}/dev-server.mjs",
       "cwd": "${workspaceFolder}",
-      "serverReadyAction": { "pattern": "Serving HTTP", "uriFormat": "http://127.0.0.1:8020/", "action": "openExternally" }
+      "console": "integratedTerminal",
+      "serverReadyAction": { "pattern": "http://127.0.0.1:([0-9]+)", "uriFormat": "http://127.0.0.1:%s/", "action": "openExternally" }
     }
   ]
 }

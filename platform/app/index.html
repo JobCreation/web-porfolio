@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>내 이력서 편집</title>
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/platform/assets/css/platform.css">
+  <link rel="stylesheet" href="/platform/assets/css/resume.css">
+</head>
+<body>
+  <div class="bar">
+    <a class="logo" href="/">이력서 메이커<i>.</i></a>
+    <nav>
+      <a href="/app" aria-current="page">편집</a>
+      <a id="nav-public" href="#" target="_blank" rel="noopener">공개 보기</a>
+      <a id="nav-owner" href="/owner" hidden>운영자</a>
+    </nav>
+    <div class="spacer"></div>
+    <span class="status" id="status" role="status"></span>
+    <span class="who" id="who"></span>
+    <button class="btn tiny quiet" id="print" type="button">인쇄·PDF</button>
+    <button class="btn tiny quiet" id="logout" type="button">로그아웃</button>
+    <button class="btn tiny primary" id="save" type="button" disabled>저장</button>
+    <div id="theme-slot"></div>
+  </div>
+
+  <main class="wrap editor" id="editor" hidden>
+    <nav class="side-tabs" id="tabs" aria-label="편집할 항목"></nav>
+    <section class="pane" id="pane"></section>
+    <section class="preview">
+      <div class="head">
+        <span class="label">미리보기</span>
+        <span class="status" id="tpl-name"></span>
+      </div>
+      <div class="paper" id="paper"></div>
+    </section>
+  </main>
+
+  <p class="wrap msg" id="boot" style="padding-top:40px">불러오는 중…</p>
+
+  <script type="module" src="/platform/assets/js/app.mjs"></script>
+</body>
+</html>

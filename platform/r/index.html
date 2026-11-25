@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이력서</title>
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/platform/assets/css/platform.css">
+  <link rel="stylesheet" href="/platform/assets/css/resume.css">
+  <style>
+    .sheet { width: min(1120px, 100% - 32px); margin: 22px auto 60px; }
+    @media print {
+      .bar { display: none; }
+      .sheet { width: auto; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <a class="logo" href="/">이력서 메이커<i>.</i></a>
+    <div class="spacer"></div>
+    <span class="status" id="status"></span>
+    <button class="btn tiny quiet" id="print" type="button">인쇄·PDF로 저장</button>
+    <div id="theme-slot"></div>
+  </div>
+  <main class="sheet" id="sheet"></main>
+  <script type="module" src="/platform/assets/js/view.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/platform/index.html" },
+    { "source": "/login", "destination": "/platform/index.html" },
+    { "source": "/app", "destination": "/platform/app/index.html" },
+    { "source": "/owner", "destination": "/platform/owner/index.html" },
+    { "source": "/r/:slug", "destination": "/platform/r/index.html" },
+    { "source": "/me", "destination": "/index.html" }
+  ]
+}

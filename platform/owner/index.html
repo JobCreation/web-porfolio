@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>운영자 · 전체 사용자</title>
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/platform/assets/css/platform.css">
+</head>
+<body>
+  <div class="bar">
+    <a class="logo" href="/">이력서 메이커<i>.</i></a>
+    <nav>
+      <a href="/app">내 이력서</a>
+      <a href="/owner" aria-current="page">운영자</a>
+    </nav>
+    <div class="spacer"></div>
+    <span class="status" id="status" role="status"></span>
+    <button class="btn tiny quiet" id="reload" type="button">새로 읽기</button>
+    <div id="theme-slot"></div>
+  </div>
+
+  <main class="wrap" style="padding:18px 0 60px">
+    <h1 style="margin:0 0 2px;font-size:20px;font-weight:800;letter-spacing:-.03em">전체 사용자</h1>
+    <p class="hint" id="count" style="margin:0 0 14px;font-size:12.5px;color:var(--muted)"></p>
+    <div class="pane" style="padding:0;overflow-x:auto">
+      <table class="table" id="table">
+        <thead>
+          <tr><th>이름</th><th>이메일</th><th>권한</th><th>공개 주소</th><th>서식</th><th>마지막 수정</th><th></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="msg" id="msg"></p>
+  </main>
+
+  <script type="module" src="/platform/assets/js/owner.mjs"></script>
+</body>
+</html>

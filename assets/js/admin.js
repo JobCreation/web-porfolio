@@ -32,8 +32,11 @@
       { key: "bio", label: "소개 글 (빈 줄로 문단 구분)", type: "textarea", wide: true, rows: 7 },
       { key: "email", label: "이메일" },
       { key: "resumeUrl", label: "이력서 링크 (없으면 비움)" },
+      { key: "portfolioUrl", label: "포트폴리오 링크 (없으면 비움)" },
+      { key: "phone", label: "전화번호 (없으면 비움)" },
       { key: "contactLine", label: "연락 섹션 문구", wide: true },
-      { key: "links", label: "링크", type: "pairs", keys: ["label", "url"], hint: "한 줄에 하나:  이름 | 주소", wide: true },
+      { key: "links", label: "링크 (여러 개 가능)", type: "pairs", keys: ["label", "url"], rows: 5,
+        hint: "한 줄에 하나:  이름 | 주소   (이름 없이 주소만 넣어도 됩니다)", wide: true },
     ] },
     { key: "projects", label: "프로젝트", kind: "list", title: "title", desc: "위에 있는 항목이 사이트에서도 먼저 보입니다.", fields: [
       { key: "image", label: "대표 사진", type: "image", wide: true },
@@ -47,9 +50,26 @@
       { key: "metrics", label: "수치", type: "pairs", keys: ["value", "label"], hint: "한 줄에 하나:  값 | 설명", wide: true },
       { key: "links", label: "링크", type: "pairs", keys: ["label", "url"], hint: "한 줄에 하나:  이름 | 주소", wide: true },
     ] },
+    { key: "capabilities", label: "핵심 역량", kind: "list", title: "title", desc: "잘하는 일과 그 근거를 짝지어 보여 줍니다. 3~4개가 보기 좋습니다.", fields: [
+      { key: "title", label: "역량 이름" },
+      { key: "summary", label: "한 줄 설명" },
+      { key: "evidence", label: "근거", type: "lines", hint: "한 줄에 하나 (프로젝트, 수치, 경험)", wide: true, rows: 4 },
+    ] },
+    { key: "process", label: "업무 흐름", kind: "list", title: "title", desc: "일을 어떤 순서로 하는지 단계로 보여 줍니다. 3~4개가 보기 좋습니다.", fields: [
+      { key: "title", label: "단계 이름" },
+      { key: "when", label: "시점 (예: 시작 전, 개발 중)" },
+      { key: "text", label: "설명", type: "textarea", wide: true },
+    ] },
     { key: "experience", label: "경력·활동", kind: "list", title: "title", fields: [
       { key: "period", label: "기간" }, { key: "title", label: "직무·활동" }, { key: "org", label: "소속", wide: true },
       { key: "description", label: "설명", type: "textarea", wide: true },
+    ] },
+    { key: "story", label: "커리어 스토리", kind: "list", title: "title", desc: "지금까지의 흐름을 이야기로 보여 줍니다.", fields: [
+      { key: "chapter", label: "장 (예: 1막)" },
+      { key: "period", label: "시기" },
+      { key: "title", label: "제목 (예: 시스템을 배우다)" },
+      { key: "org", label: "소속·장소" },
+      { key: "text", label: "설명", type: "textarea", wide: true },
     ] },
     { key: "education", label: "학력·교육", kind: "list", title: "title", fields: [
       { key: "period", label: "기간" }, { key: "title", label: "과정·학위" }, { key: "org", label: "기관", wide: true },
@@ -62,10 +82,14 @@
       { key: "group", label: "묶음 이름", wide: true },
       { key: "items", label: "기술", type: "lines", hint: "한 줄에 하나", wide: true },
     ] },
+    { key: "contribution", label: "기여하고 싶은 일", kind: "list", title: "title", desc: "입사 후 또는 앞으로 맡고 싶은 역할입니다.", fields: [
+      { key: "title", label: "영역" },
+      { key: "text", label: "설명", type: "textarea", wide: true },
+    ] },
     { key: "stats", label: "핵심 수치", kind: "list", title: "label", desc: "첫 화면 아래 큰 숫자입니다. 3~4개가 보기 좋습니다.", fields: [
       { key: "value", label: "값" }, { key: "label", label: "설명" },
     ] },
-    { key: "principles", label: "일하는 방식", kind: "list", title: "key", desc: "소개 글 아래 짧은 원칙입니다.", fields: [
+    { key: "principles", label: "일하는 원칙", kind: "list", title: "key", desc: "소개 글 아래 짧은 원칙입니다. 단계별 흐름은 '업무 흐름'에 적습니다.", fields: [
       { key: "key", label: "키워드" }, { key: "text", label: "문장" },
     ] },
   ];

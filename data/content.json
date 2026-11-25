@@ -12,21 +12,23 @@
     "photo": "uploads/1795639279481-mozbsj.jpg",
     "email": "seungwoo489@gmail.com",
     "resumeUrl": "https://litt.ly/0115",
-    "contactLine": "010-8259-7188 함께 만들 일이 있다면 편하게 연락 주세요.",
+    "contactLine": "함께 만들 일이 있다면 편하게 연락 주세요.",
     "links": [
       {
         "label": "GitHub",
         "url": "https://github.com/JobCreation"
       },
       {
-        "label": "https://thearts.arko.or.kr/apecamp/archive/26",
-        "url": ""
+        "label": "APEC 캠프 아카이브 26",
+        "url": "https://thearts.arko.or.kr/apecamp/archive/26"
       },
       {
-        "label": "https://thearts.arko.or.kr/apecamp/archive/27",
-        "url": ""
+        "label": "APEC 캠프 아카이브 27",
+        "url": "https://thearts.arko.or.kr/apecamp/archive/27"
       }
-    ]
+    ],
+    "portfolioUrl": "",
+    "phone": "010-8259-7188"
   },
   "stats": [
     {
@@ -159,6 +161,70 @@
         "AI 코딩 도구로 단계별 개발",
         "개발일지로 과정 기록"
       ]
+    }
+  ],
+  "capabilities": [
+    {
+      "title": "LLM 서비스 설계",
+      "summary": "로컬 모델로 도는 서비스를 끝까지 만듭니다.",
+      "evidence": [
+        "민원 메이트: FastAPI + Ollama 로컬 모델로 답변 초안 생성"
+      ]
+    },
+    {
+      "title": "검증과 비교",
+      "summary": "한 방법만 믿지 않고 같은 조건으로 비교합니다.",
+      "evidence": [
+        "기본·RAG·파인튜닝·하이브리드 4가지 비교 설계"
+      ]
+    },
+    {
+      "title": "안전한 처리",
+      "summary": "개인정보는 모델에 보내기 전에 가립니다.",
+      "evidence": [
+        "전화번호·주민번호·이메일 자동 마스킹"
+      ]
+    }
+  ],
+  "process": [
+    {
+      "title": "문제 정의",
+      "when": "시작 전",
+      "text": "누구의 어떤 일을 줄일지 먼저 적습니다."
+    },
+    {
+      "title": "작게 만들기",
+      "when": "개발 중",
+      "text": "동작하는 가장 작은 화면부터 띄웁니다."
+    },
+    {
+      "title": "비교·검증",
+      "when": "개발 중",
+      "text": "같은 질문으로 구성을 바꿔 가며 결과를 남깁니다."
+    },
+    {
+      "title": "기록",
+      "when": "마무리",
+      "text": "개발일지와 README로 과정을 남깁니다."
+    }
+  ],
+  "story": [
+    {
+      "chapter": "1막",
+      "period": "2026.09 – 2026.11",
+      "title": "AI를 도구로 쓰기 시작하다",
+      "org": "서울시립대학교 실전 AI 과정",
+      "text": "생성형 AI, RAG, 파인튜닝을 실습으로 익히며 민원 업무를 돕는 서비스를 만들었습니다."
+    }
+  ],
+  "contribution": [
+    {
+      "title": "서비스 구현",
+      "text": "아이디어를 동작하는 화면까지 가져갑니다."
+    },
+    {
+      "title": "데이터 검증",
+      "text": "모델 결과를 수치로 확인하고 기록합니다."
     }
   ]
 }

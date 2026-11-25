@@ -21,18 +21,36 @@
     else el.append(child);
   }
 
-  // http(s), mailto, tel 주소와 사이트 안 경로만 링크로 허용한다.
+  // http(s), mailto, tel 주소와 사이트 안 경로만 링크로 허용한다. 빈 칸은 링크가 아니다.
   function safeUrl(u) {
+    var raw = String(u == null ? "" : u).trim();
+    if (!raw) return null;
+    // example.com 처럼 http 없이 적어도 주소로 본다
+    if (!/^[a-z][a-z0-9+.-]*:/i.test(raw) && /^[\w-]+(\.[\w-]+)+([/?#]|$)/.test(raw)) raw = "https://" + raw;
     try {
-      var p = new URL(String(u || "").trim(), location.href);
+      var p = new URL(raw, location.href);
       return /^(https?|mailto|tel):$/.test(p.protocol) ? p.href : null;
     } catch (e) { return null; }
   }
+  // 이름 없이 주소만 넣어도 되고, 이름 칸에 주소를 넣어도 링크가 된다
   function link(label, url, cls) {
     var href = safeUrl(url);
-    if (!href || !label) return null;
+    var text = String(label == null ? "" : label).trim();
+    if (!href && looksLikeUrl(text)) { href = safeUrl(text); text = ""; }
+    if (!href) return null;
+    if (!text) text = hostLabel(href);
     var ext = /^https?:/.test(href) && href.indexOf(location.origin) !== 0;
-    return h("a", { class: cls, href: href, target: ext ? "_blank" : null, rel: ext ? "noopener" : null }, label, ext ? " ↗" : null);
+    return h("a", { class: cls, href: href, target: ext ? "_blank" : null, rel: ext ? "noopener" : null }, text, ext ? " ↗" : null);
+  }
+  // 이름 칸에 들어온 글이 주소인지 (사이트 안 경로는 주소로 보지 않는다)
+  function looksLikeUrl(text) {
+    return /^(https?:\/\/|mailto:|tel:)/i.test(text) || /^[\w-]+(\.[\w-]+)+([/?#]|$)/.test(text);
+  }
+  function hostLabel(href) {
+    try {
+      var u = new URL(href);
+      return /^https?:$/.test(u.protocol) ? u.hostname.replace(/^www\./, "") : u.pathname;
+    } catch (e) { return "링크"; }
   }
   function has(a) { return Array.isArray(a) && a.length > 0; }
   function paragraphs(text) {
@@ -58,7 +76,9 @@
           h("div", { class: "cta" },
             has(d.projects) && h("a", { class: "btn primary", href: "#projects" }, "프로젝트 보기 ↓"),
             link("이력서", p.resumeUrl, "btn"),
-            p.email && link("연락하기", "mailto:" + p.email, "btn quiet"))),
+            link("포트폴리오", p.portfolioUrl, "btn"),
+            (p.links || []).map(function (l) { return link(l.label, l.url, "btn quiet"); }),
+            reachable(p) && h("a", { class: "btn quiet", href: "#contact" }, "연락하기"))),
         h("figure", { class: "portrait" }, photo)),
       has(d.stats) && h("div", { class: "stats" }, d.stats.map(function (s) {
         return h("div", { class: "stat" }, h("b", null, s.value), h("span", null, s.label));
@@ -131,6 +151,48 @@
     }));
   }
 
+  function capabilities(d) {
+    if (!has(d.capabilities)) return null;
+    return h("div", { class: "caps" }, d.capabilities.map(function (c, i) {
+      return h("article", { class: "cap" },
+        h("div", { class: "num" }, String(i + 1).padStart(2, "0")),
+        h("h3", null, c.title),
+        c.summary && h("p", null, c.summary),
+        has(c.evidence) && h("ul", null, c.evidence.map(function (t) { return h("li", null, t); })));
+    }));
+  }
+
+  function flow(d) {
+    if (!has(d.process)) return null;
+    return h("ol", { class: "flow" }, d.process.map(function (s, i) {
+      return h("li", null,
+        h("div", { class: "label" }, String(i + 1).padStart(2, "0") + (s.when ? "  ·  " + s.when : "")),
+        h("h3", null, s.title),
+        s.text && h("p", null, s.text));
+    }));
+  }
+
+  function story(d) {
+    if (!has(d.story)) return null;
+    return h("div", { class: "story" }, d.story.map(function (s) {
+      return h("article", null,
+        h("div", { class: "label" }, [s.chapter, s.period].filter(Boolean).join("  ·  ")),
+        h("h3", null, s.title),
+        s.text && h("p", null, s.text),
+        s.org && h("span", { class: "who" }, s.org));
+    }));
+  }
+
+  function contribution(d) {
+    if (!has(d.contribution)) return null;
+    return h("div", { class: "contrib" }, d.contribution.map(function (c, i) {
+      return h("div", null,
+        h("b", null, String(i + 1).padStart(2, "0")),
+        h("h3", null, c.title),
+        c.text && h("p", null, c.text));
+    }));
+  }
+
   function skills(d) {
     if (!has(d.skills)) return null;
     return h("div", { class: "skills" }, d.skills.map(function (g) {
@@ -139,14 +201,23 @@
     }));
   }
 
+  function reachable(p) {
+    return !!(p.email || p.phone || has(p.links) || safeUrl(p.resumeUrl) || safeUrl(p.portfolioUrl));
+  }
+
   function contact(d) {
     var p = d.profile || {};
-    if (!p.email && !has(p.links)) return null;
+    if (!reachable(p)) return null;
     return h("section", { class: "contact wrap", id: "contact" },
       h("div", { class: "label" }, "Contact"),
       h("h2", null, p.contactLine || "함께 만들 일이 있다면 편하게 연락 주세요."),
-      p.email && link(p.email, "mailto:" + p.email, "mail"),
-      has(p.links) && h("div", { class: "links" }, p.links.map(function (l) { return link(l.label, l.url, "btn small"); })));
+      h("div", { class: "reach" },
+        p.email && link(p.email, "mailto:" + p.email, "mail"),
+        p.phone && link(p.phone, "tel:" + String(p.phone).replace(/[^0-9+]/g, ""), "mail")),
+      h("div", { class: "links" },
+        link("이력서", p.resumeUrl, "btn small"),
+        link("포트폴리오", p.portfolioUrl, "btn small"),
+        (p.links || []).map(function (l) { return link(l.label, l.url, "btn small quiet"); })));
   }
 
   /* ---------- 조립 ---------- */
@@ -157,11 +228,15 @@
     var p = d.profile || {};
     var defs = [
       ["about", "소개", about(d)],
+      ["capabilities", "핵심 역량", capabilities(d)],
       ["projects", "프로젝트", projects(d)],
+      ["process", "업무 흐름", flow(d)],
       ["experience", "경력·활동", rows(d.experience)],
+      ["story", "커리어 스토리", story(d)],
       ["education", "학력·교육", rows(d.education)],
       ["awards", "자격·수상", rows(d.awards, "date")],
       ["skills", "보유 기술", skills(d)],
+      ["contribution", "기여하고 싶은 일", contribution(d)],
     ].filter(function (x) { return x[2]; });
 
     var body = h("div", { class: "wrap" }, defs.map(function (x, i) {

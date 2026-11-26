@@ -299,7 +299,10 @@ $("save").addEventListener("click", async () => {
     const { resume: saved } = await api.saveResume({
       data: resume.data, template: resume.template, slug: resume.slug, published: resume.published,
     }, targetUser);
-    resume = saved;
+    // 저장 결과로 통째로 바꿔 끼우면 입력칸이 옛 자료를 가리키게 되어
+    // 저장 뒤에 고친 내용이 다음 저장에서 사라진다. 내용은 그대로 두고 정보만 갱신한다.
+    const { data: _ignored, ...meta } = saved;
+    Object.assign(resume, meta);
     dirty = false;
     drawPreview();
     if (tab === "__setup") drawPane();

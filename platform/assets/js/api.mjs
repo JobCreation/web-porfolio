@@ -40,7 +40,12 @@ export const api = {
 export async function readFileForUpload(file, { shrinkImages = true } = {}) {
   const isImage = file.type.startsWith("image/") && file.type !== "image/gif";
   if (isImage && shrinkImages) {
-    const bmp = await createImageBitmap(file);
+    let bmp;
+    try {
+      bmp = await createImageBitmap(file);
+    } catch {
+      throw new Error("사진 파일을 읽을 수 없습니다. 다른 사진으로 해 보세요.");
+    }
     const k = Math.min(1, 1400 / Math.max(bmp.width, bmp.height));
     const c = document.createElement("canvas");
     c.width = Math.round(bmp.width * k);

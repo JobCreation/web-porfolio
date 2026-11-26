@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-11-26T23:10:23.769Z"
+    "updatedAt": "2026-11-26T23:25:04.734Z"
   },
   "profile": {
     "name": "박승우",
@@ -15,12 +15,12 @@
     "contactLine": "함께 만들 일이 있다면 편하게 연락 주세요.",
     "links": [
       {
-        "label": "https://litt.ly/0115",
-        "url": ""
+        "label": "연구활동",
+        "url": "https://blog.naver.com/we_are_youth/223818606133"
       },
       {
-        "label": "GitHub",
-        "url": "https://github.com/JobCreation"
+        "label": "포트폴리오",
+        "url": "https://drive.google.com/file/d/1z1Hl1P111E8960h9-jsFSwGgArNv9RBV/view"
       },
       {
         "label": "APEC 캠프 아카이브 26",
@@ -29,6 +29,14 @@
       {
         "label": "APEC 캠프 아카이브 27",
         "url": "https://thearts.arko.or.kr/apecamp/archive/27"
+      },
+      {
+        "label": "리틀리",
+        "url": "https://litt.ly/0115"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/JobCreation"
       }
     ],
     "portfolioUrl": "",

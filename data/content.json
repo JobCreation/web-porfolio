@@ -1,19 +1,23 @@
 {
   "meta": {
-    "updatedAt": "2026-11-25T20:41:36.150Z"
+    "updatedAt": "2026-11-26T23:10:23.769Z"
   },
   "profile": {
     "name": "박승우",
     "nameEn": "PARK SEUNGWOO",
     "role": "AI 엔지니어",
     "tagline": "Portfolio · 2026",
-    "headline": "공공 데이터를 읽고, 현장에서 바로 쓸 수 있는 AI 도구로 만듭니다.",
-    "bio": "이 문단은 초안입니다. 관리자 페이지의 '프로필·사진'에서 이름, 사진, 소개를 내 것으로 바꿔 주세요.\n\n서울시립대학교 실전 AI 과정에서 로컬 언어 모델, RAG, 파인튜닝을 직접 돌려 보며 민원 업무를 돕는 서비스를 만들고 있습니다. 모델이 낸 답은 그대로 믿지 않고, 같은 질문으로 여러 구성을 비교해 근거를 남깁니다.",
-    "photo": "uploads/1795639279481-mozbsj.jpg",
+    "headline": "데이터를 읽고, 현장에서 바로 쓸 수 있는 AI 도구로 만듭니다.",
+    "bio": "서울시립대학교 실전 AI 과정에서 로컬 언어 모델, RAG, 파인튜닝을 직접 돌려 보며 다양한 서비스를 만들고 있습니다. 모델이 낸 답은 그대로 믿지 않고, 같은 질문으로 여러 구성을 비교해 근거를 남깁니다.",
+    "photo": "uploads/1795733829313-ll6tz4.jpg",
     "email": "seungwoo489@gmail.com",
-    "resumeUrl": "https://litt.ly/0115",
+    "resumeUrl": "",
     "contactLine": "함께 만들 일이 있다면 편하게 연락 주세요.",
     "links": [
+      {
+        "label": "https://litt.ly/0115",
+        "url": ""
+      },
       {
         "label": "GitHub",
         "url": "https://github.com/JobCreation"
@@ -119,6 +123,18 @@
       "metrics": [],
       "image": "",
       "links": []
+    },
+    {
+      "image": "",
+      "title": "GunSulCare",
+      "period": "",
+      "role": "",
+      "tags": [],
+      "summary": "",
+      "highlights": [],
+      "stack": [],
+      "metrics": [],
+      "links": []
     }
   ],
   "experience": [
@@ -127,14 +143,26 @@
       "title": "경력 또는 활동 이름",
       "org": "소속",
       "description": "초안 항목입니다. 관리자 페이지의 '경력·활동'에서 수정하거나 삭제해 주세요."
+    },
+    {
+      "period": "2025.~ ing",
+      "title": "작가활동",
+      "org": "",
+      "description": ""
     }
   ],
   "education": [
     {
-      "period": "2026.09 – 2026.11",
-      "title": "실전 AI 과정",
-      "org": "서울시립대학교",
-      "description": "생성형 AI, RAG, 파인튜닝, 에이전트를 실습 중심으로 이수"
+      "period": "2014.03 – 2016.02",
+      "title": "석사",
+      "org": "서울과학기술대학교",
+      "description": "SW분석설계학과"
+    },
+    {
+      "period": "2026.09 ~ 2026.11",
+      "title": "도시문제해결사 AI 에이전트 과정",
+      "org": "서울시립대학교 ",
+      "description": "청년취업사관학교 대학+ 생성형 AI, RAG, 파인튜닝, 에이전트를 실습 중심으로 이수 예정"
     }
   ],
   "awards": [],
@@ -212,7 +240,7 @@
     {
       "chapter": "1막",
       "period": "2026.09 – 2026.11",
-      "title": "AI를 도구로 쓰기 시작하다",
+      "title": "AI를 도구를 적극활용하다",
       "org": "서울시립대학교 실전 AI 과정",
       "text": "생성형 AI, RAG, 파인튜닝을 실습으로 익히며 민원 업무를 돕는 서비스를 만들었습니다."
     }
